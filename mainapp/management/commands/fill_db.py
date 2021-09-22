@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractUser, User
 from django.core.management.base import BaseCommand
 from mainapp.models import ProductCategory, Product
 
-JSON_PATH = 'products/features'
+JSON_PATH = 'mainapp/fixtures'
 
 
 def load_from_json(file_name):
@@ -25,7 +25,6 @@ class Command(BaseCommand):
             new_category.save()
 
         products = load_from_json('mainapp/fixtures/goods.json')
-
         Product.objects.all().delete()
         for product in products:
             prod = product.get('fields')
