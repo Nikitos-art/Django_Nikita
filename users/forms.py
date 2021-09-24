@@ -2,12 +2,14 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
 from users.models import User
 
+from django import forms
+from django.core.exceptions import ValidationError
 
 class UserLoginForm(AuthenticationForm):
 
     class Meta:
         model = User
-        fields = ('username', 'password')
+        fields = ('username', 'password',)
 
     def __init__(self, *args, **kwargs):
         super(UserLoginForm, self).__init__(*args, **kwargs)
@@ -33,3 +35,4 @@ class UserRegisterForm(UserCreationForm):
         self.fields['password2'].widget.attrs['placeholder'] = 'Подтвердите пароль'
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control py-4'
+

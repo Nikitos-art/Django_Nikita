@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import auth
 from django.urls import reverse
+from django.core.exceptions import ValidationError
 
 # Create your views here.
 from users.forms import UserLoginForm, UserRegisterForm
@@ -51,3 +52,4 @@ def register(request):
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('index'))
+

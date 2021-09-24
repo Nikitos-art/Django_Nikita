@@ -18,6 +18,17 @@
                         {% csrf_token %}
                         <div class="form-row">
                             <div class="col-md-6">
+                                <label class="small mb-1" for="inputUsername">Имя пользователя</label>
+                                {{ form.username }}
+                            </div>
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="{{ form.email.id_for_label }}">Адрес электронной
+                                    почты</label>
+                                {{ form.email }}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="small mb-1" for="{{ form.first_name.id_for_label }}">Имя</label>
                                     {{ form.first_name }}
@@ -30,17 +41,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-row">
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="inputUsername">Имя пользователя</label>
-                                {{ form.username }}
-                            </div>
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="{{ form.email.id_for_label }}">Адрес электронной
-                                    почты</label>
-                                {{ form.email }}
-                            </div>
-                        </div>
+
                         <div class="form-row">
                             <div class="col-md-6">
                                 <div class="form-group">
