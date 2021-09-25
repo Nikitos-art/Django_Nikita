@@ -5,6 +5,7 @@ from users.models import User
 from django import forms
 from django.core.exceptions import ValidationError
 
+
 class UserLoginForm(AuthenticationForm):
 
     class Meta:
