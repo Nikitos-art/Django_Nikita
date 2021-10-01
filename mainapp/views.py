@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from mainapp.models import ProductCategory, Product
 
+
 # import os, json
 # MODULE_DIR = os.path.dirname(__file__)
-
 
 
 # Create your views here.
