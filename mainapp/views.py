@@ -1,11 +1,10 @@
 from django.shortcuts import render
+import os,json
 
-from django.views.generic import ListView, TemplateView
+from django.views.generic import TemplateView
 
-from mainapp.models import ProductCategory, Product
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
-import os
+from mainapp.models import Product, ProductCategory
+from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 
 MODULE_DIR = os.path.dirname(__file__)
 
@@ -15,44 +14,23 @@ MODULE_DIR = os.path.dirname(__file__)
 class Index(TemplateView):
     template_name = 'mainapp/index.html'
 
-    # def get_context_data(self, *, object_list=None, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     # context['index'] = Index
-    #     return context
 
+def products(request, category_id=None, page_id=1):
+    # file_path = os.path.join(MODULE_DIR,'fixtures/goods.json')
+    products = Product.objects.filter(category_id=category_id) if category_id != None else Product.objects.all()
 
-class CategoriesListView(ListView):
-    model = ProductCategory
-    context_object_name = 'categories'
-    template_name = 'mainapp/products.html'
+    paginator = Paginator(products, per_page=3)
+    try:
+        products_paginator = paginator.page(page_id)
+    except PageNotAnInteger:
+        products_paginator = paginator.page(1)
+    except EmptyPage:
+        products_paginator = paginator.page(paginator.num_pages)
 
-
-class ProductView(ListView):
-    model = Product
-    context_object_name = 'products'
-    template_name = 'mainapp/products.html'
-
-    # def categorization(self, category_id=ProductCategory.pk):
-    #     products = Product.objects.filter(category_id=category_id) if category_id != None else Product.objects.all()
-    #
-    #     context = {
-    #         'title': 'Каталог',
-    #         'categories': ProductCategory.objects.all(),
-    #         'products': products
-    #     }
-    #     return render(self, 'mainapp/products.html', context)
-
-
-
-# def dispatch(self, *args, **kwargs):
-#     return super().dispatch(*args, **kwargs)
-
-
-# def get_queryset(self):
-#     return Product.objects.filter(category_id=self.request.user)
-
-
-# def get_context_data(self, *, object_list=None, **kwargs):
-#     context = super().get_context_data(**kwargs)
-#     return context
-
+    context = {
+        'title': 'Катлог',
+        'categories': ProductCategory.objects.all(),
+        'products': products_paginator
+    }
+    # context.update({'products':products_paginator})
+    return render(request, 'mainapp/products.html', context)
