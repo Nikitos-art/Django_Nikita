@@ -54,7 +54,7 @@ class UserUpdateView(UpdateView, CustomDispatchMixin):
 class UserDeleteView(DeleteView):
 
     model = User
-    template_name = 'admins/admin-users-read.html'
+    template_name = 'admins/admin-users-update-delete.html'
     success_url = reverse_lazy('admins:admins_user')
 
     @method_decorator(user_passes_test(lambda u: u.is_superuser))

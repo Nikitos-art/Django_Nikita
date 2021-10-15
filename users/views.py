@@ -25,25 +25,6 @@ class LoginListView(LoginView, BaseClassContextMixin):
     # success_url = reverse_lazy('index')
 
 
-# def login(request):
-#     if request.method == 'POST':
-#         form = UserLoginForm(data=request.POST)
-#         if form.is_valid():
-#             username = request.POST['username']
-#             password = request.POST['password']
-#             user = auth.authenticate(username=username,password=password)
-#             if user.is_active:
-#                 auth.login(request,user)
-#                 return HttpResponseRedirect(reverse('index'))
-#     else:
-#         form = UserLoginForm()
-#     context = {
-#             'title': ' Geekshop - Авторизация',
-#             'form': form
-#         }
-#     return render(request, 'users/login.html', context)
-
-
 class RegisterListView(FormView, BaseClassContextMixin):
     model = User
     template_name = 'users/register.html'
@@ -71,10 +52,14 @@ class ProfileFormView(UpdateView, BaseClassContextMixin, UserDispatchMixin):
     def get_object(self, queryset=None):
         return get_object_or_404(User, pk=self.request.user.pk)
 
-    def get_context_data(self, **kwargs):
-        context = super(ProfileFormView, self).get_context_data(**kwargs)
-        context['baskets'] = Basket.objects.filter(user=self.request.user)
-        return context
+    # @method_decorator(user_passes_test(lambda u: u.is_authenticated))
+    # def dispatch(self, request, *args, **kwargs):
+    #     return super(ProfileFormView, self).dispatch(request, *args, **kwargs)
+
+    # def get_context_data(self, **kwargs):
+    #     context = super(ProfileFormView, self).get_context_data(**kwargs)
+    #     context['baskets'] = Basket.objects.filter(user=self.request.user)
+    #     return context
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(data=request.POST, files=request.FILES, instance=self.get_object())
@@ -91,7 +76,7 @@ class Logout(LogoutView):
 def send_verify_link(user):
     verify_link = reverse('users:verify', args=[user.email, user.activation_key])
     subject = f'Для активации учетной записи {user.username} пройдите по ссылке'
-    message = f'Для подтверждения учетной записи {user.username} на портале\n {settings.DOMAIN_NAME}{verify_link}'
+    message = f'Для подтверждения учетной записи {user.username} на портале \n {settings.DOMAIN_NAME}{verify_link}'
     return send_mail(subject, message, settings.EMAIL_HOST_USER, [user.email], fail_silently=False)
 
 
@@ -102,6 +87,7 @@ def verify(request, email, activation_key):
             user.activation_key = ''
             user.activation_key_created = None
             user.is_active = True
+            user.save()
             auth.login(request, user)
         return render(request, 'users/verification.html')
     except Exception as e:
