@@ -1,5 +1,4 @@
 """geekshop URL Configuration
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
 Examples:
@@ -15,15 +14,16 @@ Including another URLconf
 """
 
 from django.urls import path
-from .views import RegisterListView, ProfileFormView, LoginListView, Logout, verify
-
+from .views import RegisterListView, ProfileFormView, Logout, LoginListView, verify
 
 app_name = 'users'
 urlpatterns = [
+
     path('login/', LoginListView.as_view(), name='login'),
     path('register/', RegisterListView.as_view(), name='register'),
     path('profile/', ProfileFormView.as_view(), name='profile'),
     path('logout/', Logout.as_view(), name='logout'),
 
     path('verify/<str:email>/<str:activation_key>/', verify, name='verify')
+
 ]

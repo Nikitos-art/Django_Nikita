@@ -1,10 +1,13 @@
 from datetime import timedelta
 
 from django.db import models
+
 from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
-from django.template.defaulttags import now
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.utils.timezone import now
 
 NULL_INSTALL = {'null': True, 'blank': True}
 
@@ -22,3 +25,27 @@ class User(AbstractUser):
         if now() <= self.activation_key_created + timedelta(hours=48):
             return False
         return True
+
+
+class UserProfile(models.Model):
+    MALE = 'M'
+    FEMALE = 'F'
+
+    GENDER_CHOICES = (
+        (MALE, 'M'),
+        (FEMALE, 'Ж'),
+    )
+
+    user = models.OneToOneField(User, unique=True, null=False, db_index=True, on_delete=models.CASCADE)
+    tagline = models.CharField(verbose_name='тэги', max_length=128, blank=True)
+    about = models.TextField(verbose_name='о себе', blank=True, null=True)
+    gender = models.CharField(verbose_name='пол', choices=GENDER_CHOICES, blank=True, max_length=5)
+
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, create, **kwargs):
+        if create:
+            UserProfile.objects.create(user=instance)
+
+    @receiver(post_save, sender=User)
+    def save_user_profile(sender, instance, **kwargs):
+        instance.userprofile.save()

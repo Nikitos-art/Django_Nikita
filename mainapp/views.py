@@ -1,18 +1,16 @@
 from django.shortcuts import render
-import os,json
-
-from django.views.generic import TemplateView
+import os, json
 
 from mainapp.models import Product, ProductCategory
-from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 MODULE_DIR = os.path.dirname(__file__)
 
 
 # Create your views here.
 
-class Index(TemplateView):
-    template_name = 'mainapp/index.html'
+def index(request):
+    return render(request, 'mainapp/index.html')
 
 
 def products(request, category_id=None, page_id=1):
