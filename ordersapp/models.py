@@ -65,7 +65,7 @@ class OrderItem(models.Model):
 
     @staticmethod
     def get_item(pk):
-        return Basket.objects.get(pk=pk).quantity
+        return OrderItem.objects.get(pk=pk).quantity
 
 
 @receiver(pre_delete, sender=Basket)

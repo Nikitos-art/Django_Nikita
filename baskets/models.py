@@ -41,7 +41,7 @@ class Basket(models.Model):
     #     self.product.quantity += self.quantity
     #     self.product.save()
     #     super(Basket, self).delete()
-    #
+    # #
     # def save(self, force_insert=False, force_update=False, using=None,
     #          update_fields=None):
     #     if self.pk:
@@ -54,3 +54,4 @@ class Basket(models.Model):
     @staticmethod
     def get_item(pk):
         return Basket.objects.get(pk=pk).quantity
+
