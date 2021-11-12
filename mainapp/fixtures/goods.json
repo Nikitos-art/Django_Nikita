@@ -16,7 +16,7 @@
     "pk": 2,
     "fields": {
       "name": "Кеды Vans  классические",
-      "image": "product_images/vans_classics_kpNKxqr.png",
+      "image": "product_images/vans_classics.jpg",
       "description": "Крутые скейтерские кеды",
       "price": "7500.00",
       "quantity": 4,
@@ -28,7 +28,7 @@
     "pk": 3,
     "fields": {
       "name": "Кроссовки Air Jordan 1",
-      "image": "product_images/air_jordan_1_Hzr00HB.png",
+      "image": "product_images/air_jordan_1.jpg",
       "description": "Air Jordan первое поколений, количество ограничено",
       "price": "14500.00",
       "quantity": 2,
@@ -40,7 +40,7 @@
     "pk": 4,
     "fields": {
       "name": "Майка Quicksilver синяя",
-      "image": "product_images/quicksilver_shirt_blue_GYyaOix.png",
+      "image": "product_images/quicksilver_shirt_blue.jpg",
       "description": "Нормальная майка",
       "price": "2500.00",
       "quantity": 4,
@@ -52,7 +52,7 @@
     "pk": 5,
     "fields": {
       "name": "Кепка NY Yakees",
-      "image": "product_images/NY_Yankees_cap_euTQ93p.png",
+      "image": "product_images/NY_Yankees_cap.jpg",
       "description": "Клёвая кепка для пацанов и девчонок",
       "price": "3800.00",
       "quantity": 5,
@@ -64,7 +64,7 @@
     "pk": 6,
     "fields": {
       "name": "Спортивный костюм Kappa",
-      "image": "product_images/kappa_tracksuit_usZbZKr.png",
+      "image": "product_images/kappa_tracksuit.jpg",
       "description": "Крутой костюм для всех",
       "price": "4750.00",
       "quantity": 2,
@@ -76,7 +76,7 @@
     "pk": 7,
     "fields": {
       "name": "Темно-синие широкие строгие брюки ASOS DESIGN",
-      "image": "product_images/Dark-blue-wide-leg-ASOs-DESIGN-trousers_5yqwFVh.png",
+      "image": "product_images/Dark-blue-wide-leg-ASOs-DESIGN-trousers.jpg",
       "description": "Легкая эластичная ткань сирсакер Фактурная ткань.",
       "price": "2890.00",
       "quantity": 4,
@@ -88,7 +88,7 @@
     "pk": 8,
     "fields": {
       "name": "Черные туфли на платформе с 3 парами люверсов Dr Martens 1461 Bex",
-      "image": "product_images/Black-Dr-Martens-shoes_8u2kMP7.png",
+      "image": "product_images/Black-Dr-Martens-shoes.jpg",
       "description": "Гладкий кожаный верх. Натуральный материал.",
       "price": "13590.00",
       "quantity": 5,
@@ -100,7 +100,7 @@
     "pk": 9,
     "fields": {
       "name": "Черный рюкзак Nike Heritage",
-      "image": "product_images/Black-Nike-Heritage-backpack_B9dCWwM.png",
+      "image": "product_images/Black-Nike-Heritage-backpack.jpg",
       "description": "Air Jordan первое поколений, количество ограничено",
       "price": "2340.00",
       "quantity": 3,
@@ -112,7 +112,7 @@
     "pk": 10,
     "fields": {
       "name": "Коричневый спортивный oversized-топ ASOS DESIGN",
-      "image": "product_images/Brown-sports-oversized-top-ASOS-DESIGN_w6qIp67.png",
+      "image": "product_images/Brown-sports-oversized-top-ASOS-DESIGN.jpg",
       "description": "Материал с плюшевой текстурой. Удобный и мягкий.",
       "price": "3390.00",
       "quantity": 2,
@@ -124,7 +124,7 @@
     "pk": 11,
     "fields": {
       "name": "Синяя куртка The North Face",
-      "image": "product_images/Blue-jacket-The-North-Face_zdq3Q3n.png",
+      "image": "product_images/Blue-jacket-The-North-Face.jpg",
       "description": "Гладкая ткань. Водонепроницаемое покрытие. Легкий и теплый пуховый наполнитель.",
       "price": "23725.00",
       "quantity": 3,
@@ -136,7 +136,7 @@
     "pk": 12,
     "fields": {
       "name": "Худи черного цвета с монограммами adidas Originals",
-      "image": "product_images/Adidas-hoodie_iw0H66J.png",
+      "image": "product_images/Adidas-hoodie.jpg",
       "description": "Мягкая ткань для свитшотов. Стиль и комфорт – это образ жизни.",
       "price": "6090.00",
       "quantity": 2,
