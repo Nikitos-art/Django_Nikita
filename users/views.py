@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.contrib.auth.mixins import LoginRequiredMixin
+# from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.core.mail import send_mail
 from django.shortcuts import render, HttpResponseRedirect, redirect, get_object_or_404
@@ -7,13 +7,13 @@ from django.contrib import auth, messages
 from django.urls import reverse, reverse_lazy
 
 # Create your views here.
-from django.utils.decorators import method_decorator
+# from django.utils.decorators import method_decorator
 from django.views.generic import ListView, FormView, UpdateView
 
-from baskets.models import Basket
+# from baskets.models import Basket
 from geekshop.mixin import BaseClassContextMixin, CustomDispatchMixin, UserDispatchMixin
 from users.forms import UserLoginForm, UserRegisterForm, UserProfileForm, UserProfileEditForm
-from django.contrib.auth.decorators import login_required, user_passes_test
+# from django.contrib.auth.decorators import login_required, user_passes_test
 
 from users.models import User
 
@@ -30,16 +30,22 @@ class RegisterListView(FormView, BaseClassContextMixin):
     template_name = 'users/register.html'
     form_class = UserRegisterForm
     success_url = reverse_lazy('users:login')
-    title = 'Geekshop - Регистрация'
+
+    def get_context_data(self, **kwargs):
+        context = super(RegisterListView, self).get_context_data(**kwargs)
+        context['title'] = 'GeekShop - Регистрация'
+        return context
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(data=request.POST)
+
         if form.is_valid():
             user = form.save()
             if send_verify_link(user):
                 messages.success(request, 'Вы успешно зарегистрировались')
+                return redirect(self.success_url)
             return redirect(self.success_url)
-        return redirect(self.success_url)
+        return render(request, self.template_name, {'form': form})
 
 
 class ProfileFormView(UpdateView, BaseClassContextMixin, UserDispatchMixin):

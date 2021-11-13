@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-import os, json
+import os
 
 from django.views.decorators.cache import cache_page, never_cache
 from django.views.generic import DetailView
@@ -47,19 +47,18 @@ def get_product(pk):
         key = f'product{pk}'
         product = cache.get(key)
         if product is None:
-            product = get_object_or_404(Product,pk=pk)
+            product = get_object_or_404(Product, pk=pk)
             cache.set(key, product)
         return product
     else:
-        return get_object_or_404(Product,pk=pk)
+        return get_object_or_404(Product, pk=pk)
 
 
-# @cache_page(3600)
+@cache_page(3600)
 @never_cache
 def products(request, category_id=None, page_id=1):
-    # file_path = os.path.join(MODULE_DIR,'fixtures/goods.json')
-    products = Product.objects.filter(category_id=category_id).select_related('category') if category_id != None else Product.objects.all().select_related('category')
-    # products = get_link_product()
+    products = Product.objects.filter(category_id=category_id).select_related('category') \
+        if category_id != None else Product.objects.all().select_related('category')
     paginator = Paginator(products, per_page=3)
     try:
         products_paginator = paginator.page(page_id)
