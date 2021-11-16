@@ -58,7 +58,7 @@ class UserCreateView(CreateView):
     model = User
     template_name = 'admins/admin-users-create.html'
     form_class = UserAdminRegisterForm
-    success_url = reverse_lazy('admins:admin_users')
+    success_url = reverse_lazy('admins:admins:admins_user_create')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(UserCreateView, self).get_context_data(**kwargs)
@@ -97,7 +97,7 @@ class UserUpdateView(UpdateView):
     model = User
     template_name = 'admins/admin-users-update-delete.html'
     form_class = UserAdminProfileForm
-    success_url = reverse_lazy('admins:admin_users')
+    success_url = reverse_lazy('admins:admins_user_update')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(UserUpdateView, self).get_context_data(**kwargs)
@@ -129,7 +129,7 @@ class UserUpdateView(UpdateView):
 class UserDeleteView(DeleteView):
     model = User
     template_name = 'admins/admin-users-update-delete.html'
-    success_url = reverse_lazy('admins:admin_users')
+    success_url = reverse_lazy('admins:admins_user_delete')
 
     @method_decorator(user_passes_test(lambda u: u.is_superuser))
     def dispatch(self, request, *args, **kwargs):
